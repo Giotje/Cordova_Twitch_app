@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>M3U8 Player</title>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.min.js"
+      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/popper.js@1.12.3"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+      integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
+      integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="./css/index.css" />
+    <!-- <script type="text/javascript" src="js/main.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+    <!-- Video Player -->
+    <script src="https://cdn.plyr.io/3.6.7/plyr.js"></script>
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.7/plyr.css" />
+    <script src="js/mousetrap.min.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">Twitchify</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarsExampleDefault"
+        aria-controls="navbarsExampleDefault"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#"
+              >Home <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">Disabled</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="http://example.com"
+              id="dropdown01"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+              >Dropdown</a
+            >
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main role="main" class="container-fluid">
+      <div class="row">
+        <div
+          class="color"
+          data-stream="buddha"
+          style="background-image: url(./img/live_user_summit1g-320x180.jpg)"
+        >
+          <img
+            src="./img/7f1cd66d-f145-4a0f-8e0e-5196c9c87410-profile_image-70x70.png"
+          />
+          <div class="text-align_">
+            <h5>Buddha</h5>
+            <p>John Charleston. NoPixel. [ @summit1g ]</p>
+          </div>
+        </div>
+        <div
+          class="color"
+          data-stream="summit1g"
+          style="background-image: url(./img/live_user_summit1g-320x180.jpg)"
+        >
+          <img
+            src="./img/99aa4739-21d6-40af-86ae-4b4d3457fce4-profile_image-70x70.png"
+          />
+          <div class="text-align_">
+            <h5>Summit1G</h5>
+            <p>John Charleston. NoPixel. [ @summit1g ]</p>
+          </div>
+        </div>
+      </div>
+    
+      <video id="video" style="width: 100%; height: 100%" controls=""></video>
+      <iframe id="chat" frameborder="0"></iframe>
+    </main>
+
+    <script>
+
+        
+
+
+        
+    </script>
+    <script>
+      $(document).ready(function () {
+        $(".color").each(function () {
+          var $this = $(this);
+          $this.on("click", function () {
+            alert($(this).data("stream"));
+            var streamname = $(this).data("stream");
+
+            $.get(
+              `https://twitchm3u8.herokuapp.com/${streamname}`,
+              function (data) {
+                var stream_url = $("#myInput", data).val();
+                alert(stream_url);
+                setTimeout(function () {
+                  // Twitch Chat
+                  var url = `https://nightdev.com/hosted/obschat?theme=&channel=${streamname}&fade=false&bot_activity=false&prevent_clipping=false`;
+                  $("#chat").attr("src", url);
+
+                  //end Twitch chat
+                  var video = document.getElementById("video");
+
+                  function playM3u8(url) {
+                    if (Hls.isSupported()) {
+                      video.volume = 0.3;
+                      var hls = new Hls();
+                      var m3u8Url = stream_url;
+                      hls.loadSource(m3u8Url);
+                      hls.attachMedia(video);
+                      hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                        video.play();
+                      });
+                      document.title = url;
+                    } else if (
+                      video.canPlayType("application/vnd.apple.mpegurl")
+                    ) {
+                      video.src = url;
+                      video.addEventListener("canplay", function () {
+                        video.play();
+                      });
+                      video.volume = 0.3;
+                      document.title = url;
+                    }
+                  }
+                  playM3u8(window.location.href.split("#")[1]);
+                  $(window).on("load", function () {
+                    $("#video").on("click", function () {
+                      this.paused ? this.play() : this.pause();
+                    });
+                    Mousetrap.bind("space", playPause);
+                    Mousetrap.bind("up", volumeUp);
+                    Mousetrap.bind("down", volumeDown);
+                    Mousetrap.bind("right", seekRight);
+                    Mousetrap.bind("left", seekLeft);
+                    Mousetrap.bind("f", vidFullscreen);
+                  });
+                }, 3000);
+              }
+            );
+
+            function playPause() {
+              video.paused ? video.play() : video.pause();
+            }
+
+            function volumeUp() {
+              if (video.volume <= 0.9) video.volume += 0.1;
+            }
+
+            function volumeDown() {
+              if (video.volume >= 0.1) video.volume -= 0.1;
+            }
+
+            function seekRight() {
+              video.currentTime += 5;
+            }
+
+            function seekLeft() {
+              video.currentTime -= 5;
+            }
+
+            function vidFullscreen() {
+              if (video.requestFullscreen) {
+                video.requestFullscreen();
+              } else if (video.mozRequestFullScreen) {
+                video.mozRequestFullScreen();
+              } else if (video.webkitRequestFullscreen) {
+                video.webkitRequestFullscreen();
+              }
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

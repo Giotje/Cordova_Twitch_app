@@ -1,0 +1,41 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    font-family: First, sans-serif;
+    color: white;
+}
+@font-face { font-family: First; src: url('FirstJob-X8rP.ttf'); } 
+body{
+   background: #7d7c7d;
+
+    
+}
+.container{
+
+}
+.color{
+    padding: 5px
+    ;
+    width: 46%;
+    display: inline-block;
+    margin: 6px;
+
+    height: 100px;
+    background-position: center;
+    background-size: cover;
+}
+.color img{
+    width: 40px;
+}
+.text-align_{
+    line-height: 0;
+    margin-top: 12px;    
+
+}
+.color p{
+    white-space: nowrap;
+    overflow-x: clip;
+    font-size: 12px;
+}
+
+
