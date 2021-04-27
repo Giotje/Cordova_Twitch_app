@@ -22,8 +22,19 @@
 document.addEventListener('deviceready', onDeviceReady, false);
 
 function onDeviceReady() {
+
+    document.getElementById("openlink").addEventListener('click', showbrowser)
     // Cordova is now initialized. Have fun!
+    window.open = cordova.InAppBrowser.open;
 
     console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
     document.getElementById('deviceready').classList.add('ready');
 }
+
+function showbrowser(){
+    var url = "https://id.twitch.tv/oauth2/authorize?client_id=di5u96cpttmxapibsjpvmyr43x6hn3&redirect_uri=http://localhost&response_type=token&scope=viewing_activity_read"
+    var target = "_blank";
+    var option = "lcoation=yes"
+    cordova.InAppBrowser.open(url,target,option);
+
+};

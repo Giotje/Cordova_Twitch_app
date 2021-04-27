@@ -50,7 +50,8 @@
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#"
+            
+            <a class="nav-link" href="https://id.twitch.tv/oauth2/authorize?client_id=di5u96cpttmxapibsjpvmyr43x6hn3&redirect_uri=https://twitchm3u8.herokuapp.com/&response_type=token&scope=viewing_activity_read"
               >Home <span class="sr-only">(current)</span></a
             >
           </li>
@@ -58,7 +59,7 @@
             <a class="nav-link" href="#">Link</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
+            <a class="nav-link" href="#">Disabled</a>
           </li>
           <li class="nav-item dropdown">
             <a
@@ -68,10 +69,14 @@
               data-toggle="dropdown"
               aria-haspopup="true"
               aria-expanded="false"
-              >Dropdown</a
+              >Settings</a
             >
             <div class="dropdown-menu" aria-labelledby="dropdown01">
               <a class="dropdown-item" href="#">Action</a>
+              <form class="form-inline my-2 my-lg-0" type="POST">
+                <input class="form-control username_update_input mr-sm-2" type="search" placeholder="Twitch Username" aria-label="Search">
+                <button class="btn username_update_button btn-outline-success my-2 my-sm-0" type="submit">Update</button>
+              </form>
               <a class="dropdown-item" href="#">Another action</a>
               <a class="dropdown-item" href="#">Something else here</a>
             </div>
@@ -79,50 +84,26 @@
         </ul>
       </div>
     </nav>
-
+  
     <main role="main" class="container-fluid">
-      <div class="row">
-        <div
-          class="color"
-          data-stream="buddha"
-          style="background-image: url(./img/live_user_summit1g-320x180.jpg)"
-        >
-          <img
-            src="./img/7f1cd66d-f145-4a0f-8e0e-5196c9c87410-profile_image-70x70.png"
-          />
-          <div class="text-align_">
-            <h5>Buddha</h5>
-            <p>John Charleston. NoPixel. [ @summit1g ]</p>
-          </div>
-        </div>
-        <div
-          class="color"
-          data-stream="summit1g"
-          style="background-image: url(./img/live_user_summit1g-320x180.jpg)"
-        >
-          <img
-            src="./img/99aa4739-21d6-40af-86ae-4b4d3457fce4-profile_image-70x70.png"
-          />
-          <div class="text-align_">
-            <h5>Summit1G</h5>
-            <p>John Charleston. NoPixel. [ @summit1g ]</p>
-          </div>
-        </div>
+      <div id="live" class="row live">
+       
+        
       </div>
-    
+
       <video id="video" style="width: 100%; height: 100%" controls=""></video>
       <iframe id="chat" frameborder="0"></iframe>
+      <button id="openlink">open</button>
+
     </main>
 
     <script>
-
-        
-
-
-        
+     
     </script>
     <script>
       $(document).ready(function () {
+      
+    
         $(".color").each(function () {
           var $this = $(this);
           $this.on("click", function () {
@@ -213,5 +194,8 @@
         });
       });
     </script>
+    <script src="js/username.js"></script>
+    <script src="js/twitch.js"></script>
+    <script src="js/index.js"></script>
   </body>
 </html>

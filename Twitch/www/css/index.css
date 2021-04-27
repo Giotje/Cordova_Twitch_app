@@ -1,7 +1,7 @@
 *{
     padding: 0px;
     margin: 0px;
-    font-family: First, sans-serif;
+    /* font-family: First, sans-serif; */
     color: white;
 }
 @font-face { font-family: First; src: url('FirstJob-X8rP.ttf'); } 
