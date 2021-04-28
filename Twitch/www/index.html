@@ -50,8 +50,9 @@
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            
-            <a class="nav-link" href="https://id.twitch.tv/oauth2/authorize?client_id=di5u96cpttmxapibsjpvmyr43x6hn3&redirect_uri=https://twitchm3u8.herokuapp.com/&response_type=token&scope=viewing_activity_read"
+            <a
+              class="nav-link"
+              href="https://id.twitch.tv/oauth2/authorize?client_id=di5u96cpttmxapibsjpvmyr43x6hn3&redirect_uri=https://twitchm3u8.herokuapp.com/&response_type=token&scope=viewing_activity_read"
               >Home <span class="sr-only">(current)</span></a
             >
           </li>
@@ -74,8 +75,18 @@
             <div class="dropdown-menu" aria-labelledby="dropdown01">
               <a class="dropdown-item" href="#">Action</a>
               <form class="form-inline my-2 my-lg-0" type="POST">
-                <input class="form-control username_update_input mr-sm-2" type="search" placeholder="Twitch Username" aria-label="Search">
-                <button class="btn username_update_button btn-outline-success my-2 my-sm-0" type="submit">Update</button>
+                <input
+                  class="form-control username_update_input mr-sm-2"
+                  type="search"
+                  placeholder="Twitch Username"
+                  aria-label="Search"
+                />
+                <button
+                  class="btn username_update_button btn-outline-success my-2 my-sm-0"
+                  type="submit"
+                >
+                  Update
+                </button>
               </form>
               <a class="dropdown-item" href="#">Another action</a>
               <a class="dropdown-item" href="#">Something else here</a>
@@ -84,116 +95,61 @@
         </ul>
       </div>
     </nav>
-  
-    <main role="main" class="container-fluid">
-      <div id="live" class="row live">
-       
-        
-      </div>
 
-      <video id="video" style="width: 100%; height: 100%" controls=""></video>
-      <iframe id="chat" frameborder="0"></iframe>
-      <button id="openlink">open</button>
+    <main role="main" class="container-fluid">
+      <div id="live" class="row live"></div>
+
+      <div id="deviceready" class="blink">
+        <p class="event listening">Connecting to Device</p>
+        <p class="event received">Device is Ready</p>
+    </div>
+      <button onclick="window.plugins.insomnia.keepAwake()">keep awake</button>
 
     </main>
 
     <script>
-     
+       var mainloopid = setInterval(mainloop, 1000);
+            function mainloop (){
+              console.log("time")
+          // call the plugin every (say) one second to keep your app awake
+          }
+
     </script>
     <script>
+      function myFunction(identifier) {}
+
       $(document).ready(function () {
-      
-    
-        $(".color").each(function () {
-          var $this = $(this);
-          $this.on("click", function () {
-            alert($(this).data("stream"));
-            var streamname = $(this).data("stream");
+        setTimeout(function () {
+          $(".color").each(function () {
+            var $this = $(this);
+            $this.on("click", function () {
+              alert($(this).data("stream"));
+              var streamname = $(this).data("stream");
 
-            $.get(
-              `https://twitchm3u8.herokuapp.com/${streamname}`,
-              function (data) {
-                var stream_url = $("#myInput", data).val();
-                alert(stream_url);
-                setTimeout(function () {
-                  // Twitch Chat
-                  var url = `https://nightdev.com/hosted/obschat?theme=&channel=${streamname}&fade=false&bot_activity=false&prevent_clipping=false`;
-                  $("#chat").attr("src", url);
+              $.get(
+                `https://twitchm3u8.herokuapp.com/${streamname}`,
+                function (data) {
+                  var stream_url = $("#myInput", data).val();
+                  sessionStorage.setItem("player_url", stream_url);
 
-                  //end Twitch chat
-                  var video = document.getElementById("video");
+                    // Twitch Chat
+                    var url = `https://nightdev.com/hosted/obschat?theme=&channel=${streamname}&fade=false&bot_activity=false&prevent_clipping=false`;
+                    sessionStorage.setItem("player_chat_url", url);
+                    window.location.href = "player/index.html";
 
-                  function playM3u8(url) {
-                    if (Hls.isSupported()) {
-                      video.volume = 0.3;
-                      var hls = new Hls();
-                      var m3u8Url = stream_url;
-                      hls.loadSource(m3u8Url);
-                      hls.attachMedia(video);
-                      hls.on(Hls.Events.MANIFEST_PARSED, function () {
-                        video.play();
-                      });
-                      document.title = url;
-                    } else if (
-                      video.canPlayType("application/vnd.apple.mpegurl")
-                    ) {
-                      video.src = url;
-                      video.addEventListener("canplay", function () {
-                        video.play();
-                      });
-                      video.volume = 0.3;
-                      document.title = url;
-                    }
-                  }
-                  playM3u8(window.location.href.split("#")[1]);
-                  $(window).on("load", function () {
-                    $("#video").on("click", function () {
-                      this.paused ? this.play() : this.pause();
-                    });
-                    Mousetrap.bind("space", playPause);
-                    Mousetrap.bind("up", volumeUp);
-                    Mousetrap.bind("down", volumeDown);
-                    Mousetrap.bind("right", seekRight);
-                    Mousetrap.bind("left", seekLeft);
-                    Mousetrap.bind("f", vidFullscreen);
-                  });
-                }, 3000);
-              }
-            );
+                    //end Twitch chat
 
-            function playPause() {
-              video.paused ? video.play() : video.pause();
-            }
-
-            function volumeUp() {
-              if (video.volume <= 0.9) video.volume += 0.1;
-            }
-
-            function volumeDown() {
-              if (video.volume >= 0.1) video.volume -= 0.1;
-            }
-
-            function seekRight() {
-              video.currentTime += 5;
-            }
-
-            function seekLeft() {
-              video.currentTime -= 5;
-            }
-
-            function vidFullscreen() {
-              if (video.requestFullscreen) {
-                video.requestFullscreen();
-              } else if (video.mozRequestFullScreen) {
-                video.mozRequestFullScreen();
-              } else if (video.webkitRequestFullscreen) {
-                video.webkitRequestFullscreen();
-              }
-            }
+                   
+                    
+                }
+              );
+            });
           });
-        });
+        }, 3000);
       });
     </script>
+          <script src="cordova.js"></script>
+
     <script src="js/username.js"></script>
     <script src="js/twitch.js"></script>
     <script src="js/index.js"></script>

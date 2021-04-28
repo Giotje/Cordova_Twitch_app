@@ -1,41 +1,93 @@
-*{
-    padding: 0px;
-    margin: 0px;
-    /* font-family: First, sans-serif; */
-    color: white;
+* {
+  padding: 0px;
+  margin: 0px;
+  /* font-family: First, sans-serif; */
+  color: white;
 }
-@font-face { font-family: First; src: url('FirstJob-X8rP.ttf'); } 
-body{
-   background: #7d7c7d;
+@font-face {
+  font-family: First;
+  src: url("FirstJob-X8rP.ttf");
+}
+body {
+  background: #7d7c7d;
+}
+.container {
+}
 
-    
+.color {
+  padding: 5px;
+  width: 46%;
+  display: inline-block;
+  margin: 6px;
+
+  height: 100px;
+  background-position: center;
+  background-size: cover;
 }
-.container{
+.color img {
+  width: 40px;
+}
+.text-align_ {
+  line-height: 0;
+  margin-top: 12px;
+}
+.text-align_ h5 {
+  background: black;
+  width: fit-content;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.color p {
+  white-space: nowrap;
+  overflow-x: clip;
+  font-size: 12px;
+}
+
+/* player */
+video {
+  width: 100%;
+}
+video:hover ~ .back {
+  display: unset;
+  position: absolute;
+  left: 6px;
+  top: 7px;
 
 }
-.color{
-    padding: 5px
-    ;
-    width: 46%;
+iframe {
+  width: 100%;
+  height: 100%;
+  border: 0px;
+}
+.page {
+  overflow: hidden;
+
+  background: black;
+}
+.chat {
+  height: 100%;
+}
+.back {
+  display: none;
+}
+@media (orientation: landscape) {
+  .page {
+    overflow: unset;
+  }
+  video{
+    width: 73%;
+    position: absolute;
+    left: 0;
+    /* display: inline-block; */
+    height: 100%;
+  }
+  .chat{
+    width: 44%;
     display: inline-block;
-    margin: 6px;
-
-    height: 100px;
-    background-position: center;
-    background-size: cover;
+  }
+  iframe{
+    width: 27%;
+    position: absolute;
+    right: 0;  
 }
-.color img{
-    width: 40px;
 }
-.text-align_{
-    line-height: 0;
-    margin-top: 12px;    
-
-}
-.color p{
-    white-space: nowrap;
-    overflow-x: clip;
-    font-size: 12px;
-}
-
-

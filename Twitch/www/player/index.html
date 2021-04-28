@@ -1,28 +1,120 @@
-<html><head>
+<html>
+  <head>
     <script
-  src="https://code.jquery.com/jquery-3.2.1.min.js"
-  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-  crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-  <script src="mousetrap.min.js" charset="utf-8"></script>
-  <style>
-    body{
-      background-color:black;
-    }
-    #video{
-      position: absolute;
-      top: 0px;
-      right: 0px;
-      bottom: 0px;
-      left: 0px;
-      margin: auto;
-      max-height: 100%;
-      max-width: 100%;
-    }
-  </style>
-<title>M3U8 Player running...</title></head>
-<body>
-  <video id="video" style="width: 100%; height: 100%;" controls=""></video>
-  <script src="player.js"></script>
-</body>
+      src="https://code.jquery.com/jquery-3.2.1.min.js"
+      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script src="../js/mousetrap.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="../css/index.css" />
+    <style>
+      body {
+        background: black;
+        overflow: hidden;
+      }
+    </style>
+    <title>M3U8 Player running...</title>
+  </head>
+  <body>
+    <div class="page">
+      <div class="video">
+        <video id="video" controls=""></video>
+        <a class="back" href="./index.html">Back</a>
+
+        <iframe id="chatframe_desktop"></iframe>
+        <div id="deviceready" class="blink" style="display: none">
+          <p class="event listening">Connecting to Device</p>
+          <p class="event received">Device is Ready</p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+            var mainloopid = setInterval(mainloop, 1000);
+            function mainloop (){
+          // call the plugin every (say) one second to keep your app awake
+          window.plugins.insomnia.keepAwake();
+          }
+            // $("video").on(
+            //   "fullscreenchange webkitfullscreenchange mozfullscreenchange",
+            //   function () {
+            //     alert("test");
+            //   }
+            // );
+            var video = document.getElementById("video");
+            playM3u8(sessionStorage.getItem("player_url"));
+            // alert(sessionStorage.getItem("player_chat_url"));
+            document.getElementById("chatframe_desktop").src = sessionStorage.getItem(
+              "player_chat_url"
+            );
+
+            function playM3u8(url) {
+              if (Hls.isSupported()) {
+                video.volume = 0.3;
+                var hls = new Hls();
+                var m3u8Url = url;
+                hls.loadSource(m3u8Url);
+                hls.attachMedia(video);
+                hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                  video.play();
+                });
+                document.title = url;
+              } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+                video.src = url;
+                video.addEventListener("canplay", function () {
+                  video.play();
+                });
+                video.volume = 0.3;
+                document.title = url;
+              }
+            }
+
+            function playPause() {
+              video.paused ? video.play() : video.pause();
+            }
+
+            function volumeUp() {
+              if (video.volume <= 0.9) video.volume += 0.1;
+            }
+
+            function volumeDown() {
+              if (video.volume >= 0.1) video.volume -= 0.1;
+            }
+
+            function seekRight() {
+              video.currentTime += 5;
+            }
+
+            function seekLeft() {
+              video.currentTime -= 5;
+            }
+
+            function vidFullscreen() {
+              if (video.requestFullscreen) {
+                video.requestFullscreen();
+              } else if (video.mozRequestFullScreen) {
+                video.mozRequestFullScreen();
+              } else if (video.webkitRequestFullscreen) {
+                video.webkitRequestFullscreen();
+              }
+            }
+
+            playM3u8(window.location.href.split("#")[1]);
+            $(window).on("load", function () {
+              $("#video").on("click", function () {
+                this.paused ? this.play() : this.pause();
+              });
+              Mousetrap.bind("space", playPause);
+              Mousetrap.bind("up", volumeUp);
+              Mousetrap.bind("down", volumeDown);
+              Mousetrap.bind("right", seekRight);
+              Mousetrap.bind("left", seekLeft);
+              Mousetrap.bind("f", vidFullscreen);
+            });
+    </script>
+
+    <script src="cordova.js"></script>
+    <script src="js/index.js"></script>
+  </body>
 </html>
