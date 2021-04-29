@@ -4,6 +4,10 @@
     <meta charset="utf-8" />
     <title>M3U8 Player</title>
     <script
+      src="https://kit.fontawesome.com/d24ca64b2d.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
       src="https://code.jquery.com/jquery-3.2.1.min.js"
       integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
       crossorigin="anonymous"
@@ -33,7 +37,10 @@
     <script src="js/mousetrap.min.js" charset="utf-8"></script>
   </head>
   <body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
+      <a class="navbar-brand" href="#">
+        <img src="./img/logo.gif" alt="" width="30" height="24" />
+      </a>
       <a class="navbar-brand" href="#">Twitchify</a>
       <button
         class="navbar-toggler"
@@ -49,107 +56,73 @@
 
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
+          <li class="nav-item">
             <a
-              class="nav-link"
+              class="nav-link active"
               href="https://id.twitch.tv/oauth2/authorize?client_id=di5u96cpttmxapibsjpvmyr43x6hn3&redirect_uri=https://twitchm3u8.herokuapp.com/&response_type=token&scope=viewing_activity_read"
               >Home <span class="sr-only">(current)</span></a
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link" href="#">Featured Streams</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Disabled</a>
+            <a class="nav-link settings_button" href="#settings">Settings</a>
           </li>
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="http://example.com"
-              id="dropdown01"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-              >Settings</a
-            >
-            <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <a class="dropdown-item" href="#">Action</a>
-              <form class="form-inline my-2 my-lg-0" type="POST">
-                <input
-                  class="form-control username_update_input mr-sm-2"
-                  type="search"
-                  placeholder="Twitch Username"
-                  aria-label="Search"
-                />
-                <button
-                  class="btn username_update_button btn-outline-success my-2 my-sm-0"
-                  type="submit"
-                >
-                  Update
-                </button>
-              </form>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
+          <li class="nav-item">
+            <!-- Search -->
+            <form class="form-inline my-2 my-lg-0" type="POST">
+              <input
+                class="form-control search_stream mr-sm-2"
+                type="search_stream"
+                placeholder="Search Stream"
+                aria-label="Search"
+              />
+              <button
+                class="btn btn-outline-success my-2 my-sm-0"
+                type="submit"
+              >
+                Search
+              </button>
+            </form>
           </li>
+          
         </ul>
       </div>
     </nav>
-
-    <main role="main" class="container-fluid">
-      <div id="live" class="row live"></div>
-
-      <div id="deviceready" class="blink">
-        <p class="event listening">Connecting to Device</p>
-        <p class="event received">Device is Ready</p>
+    <!-- Display video's layout -->
+    <div class="container-fluid videos_layout_container">
+      <div class="row live">
+       
+      </div>
     </div>
-      <button onclick="window.plugins.insomnia.keepAwake()">keep awake</button>
+    <!-- End display video's layout -->
+    <!-- Settings -->
+   <div class="container-fluid settings">
+    <div class="row" style="padding: 10px;">
+      <h4>Settings</h4>
+      <form class="form-inline my-2 my-lg-0 setting_form" type="POST">
+        <h6>Set twitch username</h6>
+        <input
+          class="form-control username_update_input mr-sm-2"
+          type="search"
+        
+          placeholder="Twitch Username"
+          aria-label="Search"
+        />
+        <button
+          class="btn username_update_button btn-outline-success my-2 my-sm-0"
+          type="submit"
+        >
+          Update
+        </button>
+      </form>
+    </div>
 
-    </main>
-
-    <script>
-       var mainloopid = setInterval(mainloop, 1000);
-            function mainloop (){
-              console.log("time")
-          // call the plugin every (say) one second to keep your app awake
-          }
-
-    </script>
-    <script>
-      function myFunction(identifier) {}
-
-      $(document).ready(function () {
-        setTimeout(function () {
-          $(".color").each(function () {
-            var $this = $(this);
-            $this.on("click", function () {
-              alert($(this).data("stream"));
-              var streamname = $(this).data("stream");
-
-              $.get(
-                `https://twitchm3u8.herokuapp.com/${streamname}`,
-                function (data) {
-                  var stream_url = $("#myInput", data).val();
-                  sessionStorage.setItem("player_url", stream_url);
-
-                    // Twitch Chat
-                    var url = `https://nightdev.com/hosted/obschat?theme=&channel=${streamname}&fade=false&bot_activity=false&prevent_clipping=false`;
-                    sessionStorage.setItem("player_chat_url", url);
-                    window.location.href = "player/index.html";
-
-                    //end Twitch chat
-
-                   
-                    
-                }
-              );
-            });
-          });
-        }, 3000);
-      });
-    </script>
-          <script src="cordova.js"></script>
-
+   </div>
+  <!-- End settings -->
+    <script src="cordova.js"></script>
+    <script src="js/main.js"></script>
     <script src="js/username.js"></script>
     <script src="js/twitch.js"></script>
     <script src="js/index.js"></script>

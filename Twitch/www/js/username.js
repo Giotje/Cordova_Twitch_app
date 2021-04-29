@@ -1,7 +1,11 @@
 $(document).ready(function(){
     $(".username_update_button").click(function(){
       // localStorage.clear();
-
+      for(let i=0; i<100;i++){
+        console.log([i])
+        localStorage.removeItem(`follow_stream${[i]}`);
+      };
+    
     event.preventDefault();
     user =   $(".username_update_input").val();
     localStorage.setItem("username", user);
@@ -29,6 +33,10 @@ $(document).ready(function(){
     request.setRequestHeader('Accept', 'application/vnd.twitchtv.v5+json');
     request.setRequestHeader('Client-ID',client);
     request.send();
+
+
+
+
 
     });
   });

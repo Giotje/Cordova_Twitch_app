@@ -36,25 +36,29 @@ function follow_live(json){
  const live_container = document.querySelector('.live'); 
  live_container.innerHTML = ''; //清空
  console.log(json.streams.length)
+ console.log(json);
  for(let i=0; i<json.streams.length;i++){
      const game_tv = document.createElement("div");  //創建物件
      game_tv.classList.add('color'); // 加入class
      game_tv.setAttribute("data-stream",`${json.streams[i].channel.name}`)
      game_tv.setAttribute("title",`${json.streams[i].channel.name}`);
-
-     game_tv.setAttribute("onclick","myFunction(this)");
-
      game_tv.setAttribute("style",`background-image:url('${json.streams[i].preview.large}');`);
 
-     game_tv.innerHTML = `
-     <img src="${json.streams[i].channel.logo}"
-   />
-   <div class="text-align_">
-          <h5>${json.streams[i].channel.name}</h5>
-          <p>${json.streams[i].channel.status}</p>
+     game_tv.innerHTML = `   
+     <div class="text-align_">
+
+     <img src="${json.streams[i].channel.logo}"/>
+   <p class="viewers">${json.streams[i].viewers}</p>
+   <div class="meta_data">
+   <p class="title">${json.streams[i].channel.name}</p>
+   <p class="title_status">${json.streams[i].channel.status}</p>
+   <p class="title_game">${json.streams[i].game}</p>
+   </div>
+       
         </div>
      `; 
      live_container.appendChild(game_tv);
+
  }
 
 
@@ -155,7 +159,10 @@ $(document).ready(function () {
 
       console.log(filter_nul);
       localStorage.setItem("follow_list",follow_streamer_list_ids);
+      for (let i = 0; i < 100; i++) {
+        localStorage.removeItem(`follow_stream${[i]}`);
 
+      };
 
       put_live(filter_nul);
 
@@ -168,7 +175,7 @@ $(document).ready(function () {
   request.setRequestHeader("Accept", "application/vnd.twitchtv.v5+json");
   request.setRequestHeader("Client-ID", client);
   request.send();
-}, 2000);
+}, );
 });
 
 

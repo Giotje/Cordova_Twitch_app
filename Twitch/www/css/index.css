@@ -1,93 +1,100 @@
-* {
-  padding: 0px;
-  margin: 0px;
-  /* font-family: First, sans-serif; */
-  color: white;
+*{
+    margin: 0px;
+    padding: 0px;
 }
-@font-face {
-  font-family: First;
-  src: url("FirstJob-X8rP.ttf");
-}
-body {
-  background: #7d7c7d;
-}
-.container {
-}
+@font-face { font-family: Valetine; src: url('./AquireLight-YzE0o.otf'); } 
 
-.color {
-  padding: 5px;
-  width: 46%;
-  display: inline-block;
-  margin: 6px;
-
-  height: 100px;
-  background-position: center;
-  background-size: cover;
+body{
+    font-family: Valentine!important;
+    background: #E6EAEF!important;
 }
-.color img {
-  width: 40px;
-}
-.text-align_ {
-  line-height: 0;
-  margin-top: 12px;
-}
-.text-align_ h5 {
-  background: black;
-  width: fit-content;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-.color p {
-  white-space: nowrap;
-  overflow-x: clip;
-  font-size: 12px;
-}
-
-/* player */
-video {
-  width: 100%;
-}
-video:hover ~ .back {
-  display: unset;
-  position: absolute;
-  left: 6px;
-  top: 7px;
-
-}
-iframe {
-  width: 100%;
-  height: 100%;
-  border: 0px;
-}
-.page {
-  overflow: hidden;
-
-  background: black;
-}
-.chat {
-  height: 100%;
-}
-.back {
-  display: none;
-}
-@media (orientation: landscape) {
-  .page {
-    overflow: unset;
-  }
-  video{
-    width: 73%;
-    position: absolute;
-    left: 0;
-    /* display: inline-block; */
-    height: 100%;
-  }
-  .chat{
-    width: 44%;
+.color{
+    width: 49%!important;
     display: inline-block;
-  }
-  iframe{
-    width: 27%;
-    position: absolute;
-    right: 0;  
+    padding: 0px!important;
+    box-shadow:inset 0 0 0 2000px rgba(3, 3, 3, 0.3);
+    height: 100px;
+    margin: 1px;
+    background-size: cover;
+    background-position: center;
 }
+.text-align_{
+    color: white!important;
+}
+.text-align_ img{
+    position: absolute;
+    /* left: 2px; */
+    width: 25px;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+.viewers{
+    text-align: right;
+    font-size: 12px;
+    padding-right: 6px;
+    padding-top: 6px;
+
+}
+.viewers::after{
+    font-family: "Font Awesome 5 Free"; font-weight: 900;
+    content: "\f4fb";
+    padding-left: 2px;
+    font-size: 12px;
+}
+.meta_data{
+    line-height: 0px;
+    /* font-size: 12px; */
+    bottom: 0px;
+    padding-right: 6px;
+    padding-left: 6px;
+    margin-top: 33px;
+}
+.title{
+    font-size: 12px;
+}
+.title_status{
+    white-space: nowrap;
+    overflow-x: clip;
+    padding-top: -3px;
+    margin-bottom: 10px;
+    margin-top: 21px;
+    font-size: 10px;
+}
+.title_game{
+font-size: 10px;
+}
+nav{
+    box-shadow: -1px 9px 11px -12px rgba(0,0,0,0.75);
+
+}
+.videos_layout_container{
+    margin-top: 60px;
+}
+.search_stream{
+width: 85%!important;
+}
+.dropdown-menu{
+    border: unset!important;
+    background: unset!important;
+}
+.active::after{
+    font-family: "Font Awesome 5 Free"; font-weight: 900;
+    content: "\f100";
+}
+
+.setting_form{
+    width: 100%!important;
+}
+.setting_form input{
+    width: 75%!important;
+}
+.setting_form button{
+    width: 25%!important;
+}
+.setting_form h6{
+margin-bottom: 0px!important;
+}
+.settings{
+    margin-top: 70px;
+    /* display: none; */
 }
