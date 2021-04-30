@@ -37,6 +37,7 @@ body{
 }
 .viewers::after{
     font-family: "Font Awesome 5 Free"; font-weight: 900;
+    color: red;
     content: "\f4fb";
     padding-left: 2px;
     font-size: 12px;
@@ -50,6 +51,7 @@ body{
     margin-top: 33px;
 }
 .title{
+    font-weight: bold;
     font-size: 12px;
 }
 .title_status{
@@ -67,19 +69,17 @@ nav{
     box-shadow: -1px 9px 11px -12px rgba(0,0,0,0.75);
 
 }
-.videos_layout_container{
-    margin-top: 60px;
-}
+
 .search_stream{
 width: 85%!important;
 }
-.dropdown-menu{
-    border: unset!important;
-    background: unset!important;
+
+.active{
+    color: darkorchid;
+
 }
-.active::after{
-    font-family: "Font Awesome 5 Free"; font-weight: 900;
-    content: "\f100";
+.notactive{
+    color:#212529!important;
 }
 
 .setting_form{
@@ -98,3 +98,21 @@ margin-bottom: 0px!important;
     margin-top: 70px;
     /* display: none; */
 }
+.navbar_bottom{
+    height: 60px;
+    background: white;
+    position: fixed;
+    width: 100%;
+    z-index: 999;
+
+    bottom: 0;
+}
+.navbar_bottom .col{
+    height: 78px;
+    text-align: center;
+    font-size: 17px;
+    padding: 20px;
+}
+.player_nav{
+    font-size: 26px!important;
+    padding-top: 14px!important;}
