@@ -15,7 +15,7 @@ function put_live(filter_nul) {
     if (request.status >= 200 && request.status < 400) {
       const response = request.responseText;
       const json = JSON.parse(response);
-      // console.log(json);
+      console.log(json);
       //   console.log(json.streams);
       follow_live(json);
     } else {
@@ -37,10 +37,9 @@ function follow_live(json) {
     const game_tv = document.createElement("div"); //創建物件
     game_tv.classList.add("color");
     game_tv.setAttribute("data-stream", `${json.streams[i].channel.name}`);
-    game_tv.setAttribute("title", `${json.streams[i].channel.name}`);
     game_tv.setAttribute(
       "style",
-      `background-image:url('${json.streams[i].preview.large}');`
+      `background-image:url('${json.streams[i].preview.medium}');`
     );
 
     game_tv.innerHTML = `   
@@ -70,6 +69,7 @@ $(document).ready(function () {
       if (request.status >= 200 && request.status < 400) {
         const response = request.responseText;
         const json = JSON.parse(response);
+        console.log(json);
         for (let i = 0; i < json.follows.length; i++) {
           localStorage.setItem(
             `follow_stream${[i]}`,
