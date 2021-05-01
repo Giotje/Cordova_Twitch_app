@@ -22,7 +22,7 @@ $(document).ready(function(){
             console.log(json.users[0]._id);
                
                localStorage.setItem("user_id", json.users[0]._id);
-               location.reload(); 
+              //  location.reload(); 
 
   
         }else{

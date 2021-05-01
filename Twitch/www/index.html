@@ -3,62 +3,61 @@
   <head>
     <meta charset="utf-8" />
     <title>M3U8 Player</title>
+  
     <script
-      src="https://kit.fontawesome.com/d24ca64b2d.js"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://code.jquery.com/jquery-3.2.1.min.js"
-      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-      crossorigin="anonymous"
-    ></script>
-    <script
-      type="text/javascript"
-      src="https://unpkg.com/popper.js@1.12.3"
-    ></script>
+    src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"
+  ></script>
+  <script
+  type="text/javascript"
+  src="https://unpkg.com/popper.js@1.12.3"
+></script>
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
       integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
       crossorigin="anonymous"
     />
-    <script
-      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
-      integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
-      crossorigin="anonymous"
-    ></script>
+    
     <link rel="stylesheet" href="./css/index.css" />
     <!-- <script type="text/javascript" src="js/main.js"></script> -->
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
     <!-- Video Player -->
-    <script src="https://cdn.plyr.io/3.6.7/plyr.js"></script>
     <link rel="stylesheet" href="https://cdn.plyr.io/3.6.7/plyr.css" />
-    <script src="js/mousetrap.min.js" charset="utf-8"></script>
   </head>
   <body>
     <div class="navbar_bottom">
       <div class="container-fluid">
         <div class="row">
           <div class="col home_nav">
-            <i class="fas fa-home"></i>
+            <i class="fas fa-home"><p>Home</p></i>
           </div>
           <div class="col search_nav">
-            <i class="fas fa-search"></i>
+            <i class="fas fa-search"><p>Search</p></i>
           </div>
           <div class="col player_nav">
             <i class="fas fa-desktop"></i>
           </div>
           <div class="col featured_nav">
-            <i class="fas fa-fire"></i>
+            <i class="fas fa-fire"><p>Hot</p></i>
           </div>
           <div class="col settings_nav">
-            <i class="fas fa-cog"></i>
+            <i class="fas fa-cog"><p>Settings</p></i>
           </div>
         </div>
       </div>
     </div>
+    <div class="container-fluid top_nav">
 
+    
+      <div class="row">
+        <div class="col">
+          <p>Player2next</p>
+          <p id="username_show"></p>
+        </div>
+    </div>
+    </div>
     <!-- Home video's layout -->
     <div class="container-fluid videos_layout_container">
       <div class="row live"></div>
@@ -66,10 +65,8 @@
     <!-- End display video's layout -->
     <!-- search -->
     <div class="container-fluid search">
-      <div class="row" style="padding: 10px">
-        <h4>search</h4>
+      <div class="row " style="padding: 10px">
         <form class="form-inline my-2 my-lg-0 search_form" type="POST">
-          <h6>Set twitch username</h6>
           <input
             class="form-control search_val mr-sm-2"
             type="search"
@@ -80,9 +77,12 @@
             class="btn search_button btn-outline-success my-2 my-sm-0"
             type="submit"
           >
-            Update
+            Search
           </button>
         </form>
+        <div class="search_result">
+
+        </div>
       </div>
     </div>
     <!-- End search -->
@@ -113,6 +113,25 @@
     </div>
     <!-- End featured video's layout -->
 
+
+      <!-- featured video's layout -->
+      <div class="container-fluid player">
+          <div class="video">
+
+            <video id="player" playsinline controls></video>
+    
+            <iframe id="chatframe_desktop"></iframe>
+            <div id="deviceready" class="blink" style="display: none">
+              <p class="event listening">Connecting to Device</p>
+              <p class="event received">Device is Ready</p>
+            </div>
+          </div>
+        </div>
+ 
+      <!-- End featured video's layout -->
+
+
+
     <!-- End settings -->
     <script src="cordova.js"></script>
     <script src="js/main.js"></script>
@@ -121,5 +140,31 @@
     <script src="js/follow.js"></script>
     <script src="js/index.js"></script>
     <script src="js/search.js"></script>
+    <script
+    src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
+    integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+    crossorigin="anonymous"
+  ></script>
+   
+  
+    <script
+    src="https://kit.fontawesome.com/d24ca64b2d.js"
+    crossorigin="anonymous"
+  ></script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <script src="js/mousetrap.min.js" charset="utf-8"></script>
+  <script src="https://cdn.plyr.io/3.6.7/plyr.js"></script>
+
+  <script>
+     const player = new Plyr('#player',{
+       debug: 1,
+       settings: ['loop'],
+       autoplay: 1,
+       controls: ['play','mute','fullscreen','pip']
+     });
+
+</script>
   </body>
 </html>

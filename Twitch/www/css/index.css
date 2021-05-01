@@ -1,118 +1,247 @@
-*{
-    margin: 0px;
-    padding: 0px;
+* {
+  margin: 0px;
+  padding: 0px;
 }
-@font-face { font-family: Valetine; src: url('./AquireLight-YzE0o.otf'); } 
+:root{
+    --plyr-color-main: #9932CC;
+}
+@font-face {
+  font-family: Valetine;
+  src: url("./OpenSans-Regular.ttf");
+}
 
-body{
-    font-family: Valentine!important;
-    background: #E6EAEF!important;
+body {
+  font-family: Valentine !important;
+  /* background: #e6eaef !important; */
+  background: #273559;
 }
-.color{
-    width: 49%!important;
+.color {
+  width: 49% !important;
+  display: inline-block;
+  padding: 0px !important;
+  box-shadow: inset 0 0 0 2000px rgba(3, 3, 3, 0.3);
+  height: 100px;
+  margin: 1px;
+  background-size: cover;
+  background-position: center;
+}
+.text-align_ {
+  color: white !important;
+}
+.text-align_ img {
+  position: absolute;
+  /* left: 2px; */
+  width: 25px;
+  margin-left: 5px;
+  margin-top: 5px;
+}
+.viewers {
+  text-align: right;
+  font-size: 12px;
+  padding-right: 6px;
+  padding-top: 6px;
+}
+.viewers::after {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  color: red;
+  content: "\f4fb";
+  padding-left: 2px;
+  font-size: 12px;
+}
+.meta_data {
+  line-height: 0px;
+  /* font-size: 12px; */
+  bottom: 0px;
+  padding-right: 6px;
+  padding-left: 6px;
+  margin-top: 33px;
+}
+.title {
+  font-weight: bold;
+  font-size: 12px;
+}
+.title_status {
+  white-space: nowrap;
+  overflow-x: clip;
+  padding-top: -3px;
+  margin-bottom: 10px;
+  margin-top: 21px;
+  font-size: 10px;
+}
+.title_game {
+  font-size: 10px;
+}
+nav {
+  box-shadow: -1px 9px 11px -12px rgba(0, 0, 0, 0.75);
+}
+
+.search_stream {
+  width: 85% !important;
+}
+
+.active {
+  color: darkorchid;
+}
+.notactive {
+  color: #212529 !important;
+}
+
+.setting_form {
+  width: 100% !important;
+}
+.setting_form input {
+  width: 75% !important;
+}
+.setting_form button {
+  width: 25% !important;
+}
+.setting_form h6 {
+  margin-bottom: 0px !important;
+}
+.settings {
+  margin-top: 70px;
+  /* display: none; */
+}
+.navbar_bottom {
+  height: 45px;
+  color: white;
+  background: #161F35;
+  position: fixed;
+  width: 100%;
+  z-index: 999;
+
+  bottom: 0;
+}
+.navbar_bottom p{
+    font-size: 12px;
+}
+.navbar_bottom .col {
+  height: 78px;
+  text-align: center;
+  font-size: 15px;
+  /* padding: 20px; */
+  padding-top: 11px;
+
+}
+.player_nav {
+  font-size: 26px !important;
+  padding-top: 5px !important;
+}
+.top_nav {
+    top: 0px;
+  position: fixed;
+  z-index: 99;
+  background: #161F35;
+  color: white;
+}
+.top_nav p {
     display: inline-block;
-    padding: 0px!important;
-    box-shadow:inset 0 0 0 2000px rgba(3, 3, 3, 0.3);
-    height: 100px;
-    margin: 1px;
-    background-size: cover;
-    background-position: center;
-}
-.text-align_{
-    color: white!important;
-}
-.text-align_ img{
-    position: absolute;
-    /* left: 2px; */
-    width: 25px;
-    margin-left: 5px;
-    margin-top: 5px;
-}
-.viewers{
-    text-align: right;
-    font-size: 12px;
-    padding-right: 6px;
-    padding-top: 6px;
 
-}
-.viewers::after{
-    font-family: "Font Awesome 5 Free"; font-weight: 900;
-    color: red;
-    content: "\f4fb";
-    padding-left: 2px;
-    font-size: 12px;
-}
-.meta_data{
-    line-height: 0px;
-    /* font-size: 12px; */
-    bottom: 0px;
-    padding-right: 6px;
-    padding-left: 6px;
-    margin-top: 33px;
-}
-.title{
-    font-weight: bold;
-    font-size: 12px;
-}
-.title_status{
-    white-space: nowrap;
-    overflow-x: clip;
-    padding-top: -3px;
+    font-size: 20px;
+    /* height: 100%; */
+    margin-top: 10px;
     margin-bottom: 10px;
-    margin-top: 21px;
-    font-size: 10px;
 }
-.title_game{
-font-size: 10px;
-}
-nav{
-    box-shadow: -1px 9px 11px -12px rgba(0,0,0,0.75);
-
-}
-
-.search_stream{
-width: 85%!important;
-}
-
-.active{
+.top_nav p:first-child::before{
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
     color: darkorchid;
+    padding-right: 10px;
+    content: "\f6e2";
+}
+.top_nav p:first-child::after{
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: darkorchid;
+    padding-right: 10px;
+    content: " / ";
+}
+.videos_layout_container{
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+.search_result{
+    margin-top: 60px;
+    width: 97%;
+    height: auto;
+
+    margin-bottom: 60px;
+}
+.search form{
+    position: absolute;
+    bottom: 32px;
+    width: 94%;
 
 }
-.notactive{
-    color:#212529!important;
+.search form input{
+    width: 73%!important;
 }
+.search form button{
+    background: #161F35;
+    border: 0px;
+    color: white;
+    margin-bottom: unset!important;
+    margin-top: unset!important;
+    width: 27%!important;
+}
+.search_{
+    height: 190px;
+    background-position: center;
+    background-size: cover;
+    box-shadow: inset 0 0 0 2000px rgb(3 3 3 / 30%);
+}
+.search_ .text-align_{
+    height: -webkit-fill-available;
+    height: inherit;
+}
+.search_ .text-align_ .meta_data{
+   margin-top: 118px;
+}
+.player{
+    padding: unset;
+    margin:unset;
+    height: 90vh;
 
-.setting_form{
-    width: 100%!important;
 }
-.setting_form input{
-    width: 75%!important;
+.video{
+    margin-top: 50px;
+    height: 100%;
+
 }
-.setting_form button{
-    width: 25%!important;
-}
-.setting_form h6{
-margin-bottom: 0px!important;
-}
-.settings{
-    margin-top: 70px;
-    /* display: none; */
-}
-.navbar_bottom{
-    height: 60px;
-    background: white;
-    position: fixed;
+video{
     width: 100%;
-    z-index: 999;
+}
+iframe{
+    width: 100%;
+    height: 400px;
+    border: 0px;
+}
 
-    bottom: 0;
-}
-.navbar_bottom .col{
-    height: 78px;
-    text-align: center;
-    font-size: 17px;
-    padding: 20px;
-}
-.player_nav{
-    font-size: 26px!important;
-    padding-top: 14px!important;}
+@media (orientation: landscape) {
+    .top_nav {
+        display: none;
+    }
+    .navbar_bottom{
+        display: none;
+    }
+    .video{
+        margin-top: 0px;
+    }
+    .plyr {
+        width: 77.7%;
+        height: 100vh;
+        display: inline-block!important;
+    }
+    iframe{
+        width: 21%;
+    /* height: 400px; */
+    border: 0px;
+    /* top: 0px; */
+    position: absolute;
+    height: inherit;
+    }
+    body{
+        background: black;
+    }
+  }

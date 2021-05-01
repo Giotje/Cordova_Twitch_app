@@ -17,6 +17,8 @@ function featured_live(json) {
   for (let i = 0; i < json.featured.length; i++) {
     const game_tv = document.createElement("div"); //創建物件
     game_tv.classList.add("color");
+    game_tv.classList.add("featur");
+
     game_tv.setAttribute("data-stream", `${json.featured[i].stream.channel.display_name}`);
     game_tv.setAttribute(
       "style",
